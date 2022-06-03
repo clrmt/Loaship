@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>loaship v1.02</title>
+
+    <script charset='utf-8' src="index.js"></script>
+    <style>
+        table tr:first-child td{
+            font-weight:900;
+        }
+        #sailors tr:not(:first-child):hover{
+            background-color:#b4e9ff;
+        }
+        td {
+            padding-right:16px;
+        }
+        table tr{
+            border:2px solid #ffffff;
+        }
+        .presetSelected {
+            background-color: #d2d2c2;
+            border: 1px solid #808080;
+            cursor: default;
+        }
+
+        .presetList {
+            border: 1px solid #ffffff;
+            cursor: pointer;
+        }
+
+        .grade0Text {
+            color: #a5a5a5;
+        }
+
+        .grade1Text {
+            color: #6bbd00;
+        }
+
+        .grade2Text {
+            color: #00b0fa;
+        }
+
+        .grade3Text {
+            color: #ba00f9;
+        }
+
+        .grade4Text {
+            color: #f99200;
+        }
+
+        .grade5Text {
+            color: #fa5d00;
+        }
+    </style>
+</head>
+<body>
+    <div id='error' style='font-weight:900;pointer-events:none;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;position:fixed;color:#ff0000;background-color:#ffffff'></div>
+    <div id='divLeft' style='float:left;width:252px;padding:10px;background-color:#e8e8e8'>
+        <div id='presetList'>프리셋 영역</div>
+        <div>
+            <input type='button' value='프리셋 추가' onclick='createPreset();' />
+            <input type='button' value='프리셋 제거' onclick='removePreset();' />
+        </div>
+        <br />
+        항해 모험물 포인트: 
+        <input type='number' id='adventurePoint' min='0' max='47' step='1' value='1' style='width:40px;' /><br />
+        <div style='font-size:12px;' id='adventurePointResistance'></div>
+    </div>
+    <div id='divRight' style='float: left; padding: 10px;'>
+        기본 속도: <div id='shipSpeed' style='display:inline;'></div> 노트 + 나침반(1.0~4.0) + 베축(3.0)<br />
+        <br />
+        <table class='resistanceResult' style='border:2px solid #000000;padding:4px;text-align:center;'>
+            <tr id='resistanceImage'></tr>
+            <tr id='resistanceResult'></tr>
+            <tr id='resistanceLevel1'></tr>
+            <tr></tr>
+            <tr></tr>
+            <tr></tr>
+        </table>
+        <div id='area'>
+            <label><input type='radio' name='areaRadio' value='0' checked='checked' />없음</label>
+            <!--<label><input type='radio' name='areaRadio' value='1' />기에나</label>-->
+            <label><input type='radio' name='areaRadio' value='2' />로헨델</label>
+            <label><input type='radio' name='areaRadio' value='3' />욘</label>
+            <label><input type='radio' name='areaRadio' value='4' />페이튼</label>
+            <label><input type='radio' name='areaRadio' value='5' />파푸니카</label>
+        </div>
+        <br />
+        <div>
+            <select id='shipList' onclick='savePreset()' onchange='savePreset()'></select>
+            <select id='shipLevel' onclick='savePreset()' onchange='savePreset()'></select>
+        </div>
+        스킨 내성: <div id='skinResistance'>
+            <input type='number' placeholder='0' value='0' style='width:36px;' />
+            <input type='number' placeholder='0' value='0' style='width:36px;' />
+            <input type='number' placeholder='0' value='0' style='width:36px;' />
+            <input type='number' placeholder='0' value='0' style='width:36px;' />
+            <input type='number' placeholder='0' value='0' style='width:36px;' />
+            <input type='number' placeholder='0' value='0' style='width:36px;' />
+            <div id='totalSkinResistance' style='display:inline;'></div>
+        </div>
+        <br />
+        탑승 가능한 선원만 보기: <input id='isRidable' type='checkbox' checked='checked' onclick='refresh()' onchange='refresh()' />
+        <table class='sailors' style='border-collapse:collapse;' id='sailors'></table>
+    </div>
+</body>
+</html>
